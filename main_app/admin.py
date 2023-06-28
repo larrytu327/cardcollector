@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Card 
+from .models import Player, Season_Stat
 # Register your models here.
 
-admin.site.register(Card) # this line will add the model to the admin panel
+admin.site.register(Player) # this line will add the model to the admin panel
+admin.site.register(Season_Stat)
