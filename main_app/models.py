@@ -9,22 +9,30 @@ class Player(models.Model):
     def __str__(self):
         return "Player: " + self.name
     class Meta:
-        ordering = ['name']
+        ordering = ['name']         
 
 class Season_Stat(models.Model):
-    AB = models.IntegerField(default=0)
-    BA = models.IntegerField(default=0)
-    OBP = models.IntegerField(default=0)
-    HR = models.IntegerField(default=0)
-    RBI = models.IntegerField(default=0)
-    SB = models.IntegerField(default=0)
-    R = models.IntegerField(default=0) 
-    H = models.IntegerField(default=0)
-    G = models.IntegerField(default=0)
+    ab = models.IntegerField(default=0)
+    ba = models.IntegerField(default=0)
+    obp = models.IntegerField(default=0)
+    hr = models.IntegerField(default=0)
+    rbi = models.IntegerField(default=0)
+    sb = models.IntegerField(default=0)
+    r = models.IntegerField(default=0) 
+    h = models.IntegerField(default=0)
+    g = models.IntegerField(default=0)
     year = models.IntegerField(default=0)
     team = models.CharField(max_length=100)
     player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="season_stats")
 
     def __str__(self):
         return self.year
+    class Meta:
+        ordering = ['year']
 
+class Players_List(models.Model):
+    name = models.CharField(max_length=150)
+    players = models.ManyToManyField(Player)
+
+    def __str__(self):
+        return self.name

@@ -23,6 +23,114 @@
         <h4 class="title is-4">About</h4>
         <p>{{player.bio}}</p>
     </div>
+    <form class="mb-5" action="{% url 'season_stat_create' player.pk %}" method="post">
+        {% csrf_token %}
+        <div class="field has-addons">
+            <div class="control">
+                <input
+                    class="input"
+                    type="number"
+                    name="ab"
+                    placeholder="AB"
+                />
+            </div>
+            <div class="control">
+                <input
+                    class="input"
+                    type="number"
+                    name="ba"
+                    placeholder="BA"
+                />
+            </div>
+            <div class="control">
+                <input
+                    class="input"
+                    type="number"
+                    name="obp"
+                    placeholder="OBP"
+                />
+            </div>
+            <div class="control">
+                <input
+                    class="input"
+                    type="number"
+                    name="hr"
+                    placeholder="HR"
+                />
+            </div>
+            <div class="control">
+                <input
+                    class="input"
+                    type="number"
+                    name="rbi"
+                    placeholder="RBI"
+                />
+            </div>
+            <div class="control">
+                <input
+                    class="input"
+                    type="number"
+                    name="sb"
+                    placeholder="SB"
+                />
+            </div>
+            <div class="control">
+                <input
+                    class="input"
+                    type="number"
+                    name="r"
+                    placeholder="R"
+                />
+            </div>
+            <div class="control">
+                <input
+                    class="input"
+                    type="number"
+                    name="h"
+                    placeholder="H"
+                />
+            </div>
+            <div class="control">
+                <input
+                    class="input"
+                    type="number"
+                    name="g"
+                    placeholder="G"
+                />
+            </div>
+            <div class="control">
+                <input
+                    class="input"
+                    type="number"
+                    name="year"
+                    placeholder="Year"
+                />
+            </div>
+            <div class="control">
+                <input
+                    class="input"
+                    type="text"
+                    name="team"
+                    placeholder="Team"
+                />
+            </div>
+            <div class="control">
+                <input class="button is-primary" type="submit" value="Add Season Stats" />
+            </div>
+        </div>
+    </form>
+    <div class="home__season_stats">
+        {% for season_stat in player.season_stats.all %}
+            <div class="season_stats mb-5">
+                <h3 class="title is-3 has-text-success">AB: {{season_stat.ab}}</h3>
+                <hr />
+                <h3 class="title is-3 has-text-success">RBI: {{season_stat.rbi}}</h3>
+                <hr />
+            </div>
+        {% empty %} 
+            <div class="playlist mb-5">There are no stats for this player</div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

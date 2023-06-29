@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
-from .models import Player
+from .models import Player, Season_Stat
 from django.urls import reverse
 
 
@@ -41,6 +41,11 @@ class PlayerDetail(DetailView):
     model = Player
     template_name = "player_detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["season_stats"] = Season_Stat.objects.all()
+        return context
+
 class PlayerUpdate(UpdateView):
     model = Player
     fields = ['name','img', 'bio']
@@ -54,3 +59,21 @@ class PlayerDelete(DeleteView):
     model = Player
     template_name = "player_delete_confirmation.html"
     success_url = "/players/"
+
+class Season_StatCreate(View):
+
+    def post(self, request, pk):
+        ab = request.POST.get("ab")
+        ba = request.POST.get("ba")
+        obp = request.POST.get("obp")
+        hr = request.POST.get("hr")
+        rbi = request.POST.get("rbi")
+        sb = request.POST.get("sb")
+        r = request.POST.get("r")
+        h = request.POST.get("h")
+        g = request.POST.get("g")
+        year = request.POST.get("year")
+        team = request.POST.get("team")
+        player = Player.objects.get(pk=pk)
+        Season_Stat.objects.create(ab=ab, ba=ba, obp=obp, hr=hr, rbi=rbi, sb=sb, r=r, h=h, g=g, year=year, team=team, player=player)
+        return redirect('player_detail', pk=pk)
