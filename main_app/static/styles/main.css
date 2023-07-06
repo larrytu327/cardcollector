@@ -3,7 +3,7 @@ body {
     color: #ffffff;
     min-height: 100vh;
   }
-  
+
   h1,
   h2,
   h3 {
@@ -75,4 +75,9 @@ body {
   
   .detail__container {
     margin-top: 500px;
+  }
+
+  .stats {
+    display: inline;
+    margin-right: 10px;
   }

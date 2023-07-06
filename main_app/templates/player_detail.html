@@ -122,10 +122,17 @@
     <div class="home__season_stats">
         {% for season_stat in player.season_stats.all %}
             <div class="season_stats mb-5">
-                <h3 class="title is-3 has-text-success">AB: {{season_stat.ab}}</h3>
-                <hr />
-                <h3 class="title is-3 has-text-success">RBI: {{season_stat.rbi}}</h3>
-                <hr />
+                <h3 class="stats">AB: {{season_stat.ab}} |</h3>
+                <h3 class="stats">BA: {{season_stat.ba}} |</h3>
+                <h3 class="stats">OBP: {{season_stat.obp}} |</h3>
+                <h3 class="stats">HR: {{season_stat.hr}} |</h3>
+                <h3 class="stats">RBI: {{season_stat.rbi}} |</h3>
+                <h3 class="stats">SB: {{season_stat.sb}} |</h3>
+                <h3 class="stats">R: {{season_stat.r}} |</h3>
+                <h3 class="stats">H: {{season_stat.h}} |</h3>
+                <h3 class="stats">G: {{season_stat.g}} |</h3>
+                <h3 class="stats">Year: {{season_stat.year}} |</h3>
+                <h3 class="stats">Team: {{season_stat.team}}</h3>
             </div>
         {% empty %} 
             <div class="playlist mb-5">There are no stats for this player</div>

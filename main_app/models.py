@@ -30,9 +30,10 @@ class Season_Stat(models.Model):
     class Meta:
         ordering = ['year']
 
-class Players_List(models.Model):
+class MyTeam(models.Model):
     name = models.CharField(max_length=150)
     players = models.ManyToManyField(Player)
 
     def __str__(self):
         return self.name
+    

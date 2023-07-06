@@ -4,12 +4,17 @@ from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
-from .models import Player, Season_Stat
+from .models import Player, Season_Stat, MyTeam
 from django.urls import reverse
 
 
 class Home(TemplateView):
     template_name = "home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["myTeam"] = MyTeam.objects.all()
+        return context
 
 class About(TemplateView):
     template_name = "about.html"
@@ -77,3 +82,12 @@ class Season_StatCreate(View):
         player = Player.objects.get(pk=pk)
         Season_Stat.objects.create(ab=ab, ba=ba, obp=obp, hr=hr, rbi=rbi, sb=sb, r=r, h=h, g=g, year=year, team=team, player=player)
         return redirect('player_detail', pk=pk)
+    
+class MyTeamPlayersAssoc(View):
+    def get(self, request, pk, player_pk):
+        assoc = request.GET.get("assoc")
+        if assoc == "remove":
+            MyTeam.objects.get(pk=pk).players.remove(player_pk)
+        if assoc == "add":
+            MyTeam.objects.get(pk=pk).players.add(player_pk)
+        return redirect('home')
